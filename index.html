@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Flashcards - Droit constitutionnel</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f9; text-align: center; }
+    h1 { color: #333; }
+    .card { 
+      background: white; 
+      border: 1px solid #ccc; 
+      padding: 20px; 
+      margin: 20px auto; 
+      width: 350px; 
+      border-radius: 8px; 
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    }
+    .question { font-weight: bold; margin-bottom: 10px; }
+    .answer { display: none; margin-top: 10px; color: #007BFF; }
+    button { 
+      margin: 10px; 
+      padding: 10px 15px; 
+      border: none; 
+      background: #007BFF; 
+      color: white; 
+      border-radius: 5px; 
+      cursor: pointer; 
+    }
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+  <h1>Flashcards - Notion d'État</h1>
+  
+  <div id="flashcards"></div>
+  
+  <button onclick="addFlashcard()">➕ Ajouter une flashcard</button>
+  
+  <script>
+    const flashcards = [
+      { question: "Quels sont les trois éléments constitutifs de l'État ?", answer: "Territoire, population, organisation politique et juridique" },
+      { question: "Selon Kelsen, comment définir l'État ?", answer: "Comme un ordre juridique spécifique, abstrait et autonome" },
+      { question: "Quelle réforme française a marqué un tournant dans la décentralisation ?", answer: "Les lois Defferre de 1982" }
+    ];
+    
+    function displayFlashcards() {
+      const container = document.getElementById("flashcards");
+      container.innerHTML = "";
+      flashcards.forEach((card, index) => {
+        container.innerHTML += `
+          <div class="card">
+            <p class="question">Q${index+1}: ${card.question}</p>
+            <button onclick="toggleAnswer(${index})">Afficher la réponse</button>
+            <p class="answer" id="answer-${index}">${card.answer}</p>
+          </div>
+        `;
+      });
+    }
+    
+    function toggleAnswer(index) {
+      const answer = document.getElementById("answer-" + index);
+      answer.style.display = answer.style.display === "none" ? "block" : "none";
+    }
+    
+    function addFlashcard() {
+      const question = prompt("Entrez la question :");
+      const answer = prompt("Entrez la réponse :");
+      if(question && answer) {
+        flashcards.push({ question, answer });
+        displayFlashcards();
+      }
+    }
+    
+    displayFlashcards();
+  </script>
+</body>
+</html>
